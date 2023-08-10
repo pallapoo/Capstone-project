@@ -14,7 +14,7 @@ pipeline {
                 // Build and test your Maven project
                 script {
                     def mvnHome = tool 'Maven' // Assumes you've configured Maven in Jenkins
-                    sh "${mvnHome}/bin/mvn clean test -DsuiteXmlFile=testng.xml"
+                    bat "${mvnHome}\\bin\\mvn clean test -DsuiteXmlFile=testng.xml"
                 }
             }
         }
