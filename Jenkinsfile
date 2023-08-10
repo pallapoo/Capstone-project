@@ -17,6 +17,13 @@ pipeline {
                     bat "${mvnHome}/bin/mvn test -X"
                 }
             }
+
+post {
+                always {
+                    // Archive test reports (e.g., surefire reports)
+                    junit '**/target/surefire-reports/*.xml'
+                }
+            }
         }
     }
 }
