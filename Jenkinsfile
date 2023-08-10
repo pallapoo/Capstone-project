@@ -1,24 +1,21 @@
-pipeline{
+pipeline {
     agent any
-    tools {nodejs "NodeJS"}
-    stages{
-        stage('Source') {
-            steps{
-                git 'https://github.com/pallapoo/estore-admin-app.git'
-
-                sh "--npm install -f"
-
-                echo 'Source stage finished'
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your code from version control (e.g., Git)
+                checkout scm
             }
         }
-
-        stage('Build'){
-            steps{
-                sh "npm run ng build"
-                echo 'Build stage finished'
-
-
+        
+        stage('Build and Test') {
+            steps {
+                // Build and test your Maven project
+                script {
+                    def mvnHome = tool 'Maven' // Assumes you've configured Maven in Jenkins
+                    sh "${mvnHome}/bin/mvn clean test -DsuiteXmlFile=testng.xml"
+                }
             }
         }
     }
-}
