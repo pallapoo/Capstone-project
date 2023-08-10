@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Build and test your Maven project
                 script {
-                   def mvnHome = tool name: 'Maven', type: 'maven'
+                   def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
                     bat "${mvnHome}/bin/mvn test"
                 }
             }
